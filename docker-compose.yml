@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  api:
+    build:
+      context: stubs
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./stubs:/stubs
+    command: [
+      --host,         0.0.0.0,
+      --port,         80,
+      --middlewares,  randomize.js,
+      --watch,        db.js
+    ]
+    environment:
+      - FAILURE_RATE=0.1
+      - MIN_DELAY_MS=0
+      - MAX_DELAY_MS=3000
+
+  # app:
+  #   build:
+  #     context: app
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - api
