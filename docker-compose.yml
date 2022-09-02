@@ -7,14 +7,11 @@ services:
       dockerfile: Dockerfile
     stdin_open: true
     tty: true
+    ports:
+      - "8080:8080"
     volumes:
       - ./stubs:/stubs
-    command: [
-      --host,         0.0.0.0,
-      --port,         80,
-      --middlewares,  randomize.js,
-      --watch,        db.js
-    ]
+    command: -p 8080 --middlewares randomize.js --watch db.js    
     environment:
       - FAILURE_RATE=0.1
       - MIN_DELAY_MS=0
