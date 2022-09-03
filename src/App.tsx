@@ -1,34 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import styled from '@emotion/styled';
+import React from 'react'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Sanction } from './pages/Sanction';
+import { Sanctions } from './pages/Sanctions';
 
-function App() {
-  const [count, setCount] = useState(0)
+const AppContainer = styled.div`
+  flex: 1;
+  background-color: white;
+  width: 100%;
+  max-width: 1268px;
+  height: 100%;
+  max-height: 90vh;
+  margin: 12px 20px;
+  padding: 16px;
+  border-radius: 8px;
+  overflow: auto;
+  
+  scrollbar-width: auto;
+  scrollbar-color: #ccc transparent;
 
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+    border: 3px solid transparent;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #8590a7;
+  }
+`
+
+export default function App() {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <AppContainer>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="sanctions" >
+            <Route index element={<Sanctions />} />
+            <Route path=":sanctionId" element={<Sanction />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AppContainer>
   )
 }
-
-export default App
