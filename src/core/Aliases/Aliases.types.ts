@@ -11,3 +11,8 @@ export type ExpandedAlias = Alias & {
 }
 
 export type ExpandedAliasList = ExpandedAlias[]
+
+export type PaginatedExpandedAliasList = {
+  pages: number;
+  list: ExpandedAliasList
+}

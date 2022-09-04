@@ -8,16 +8,16 @@ import { buildPagesSequence } from './Pagination.helper'
 type PaginationProps = {
   quantity: number,
   active: number,
-  itemRange: number,
   onChange: (page: number) => void,
+  itemRange?: number,
 }
 
-export const Pagination = ({
+export function Pagination({
   quantity = 1,
   active = 1,
-  itemRange = 2,
+  itemRange = 1,
   onChange = () => { },
-}: PaginationProps) => {
+}: PaginationProps) {
   const availablePages = useMemo(() => buildPagesSequence(active, itemRange, quantity), [active, itemRange, quantity])
 
   if (!quantity) {
