@@ -4,6 +4,7 @@ export const Table = styled.table`
   background-color: white;
   table-layout: auto;
   width: 100%;
+  max-width: 100%;
   margin: auto;
   border-collapse: separate;
   border-spacing: 0;
@@ -19,6 +20,11 @@ export const TableCell = styled.td`
   white-space: nowrap;
   padding: 20px;
   font-weight: 500;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   &:last-of-type {
     border-radius: 0 10px 10px 0;
   }
@@ -47,10 +53,10 @@ export const TableBody = styled.tbody`
   }
 `
 
-export const TableBodyEmptyCell = styled.tbody`
-  background-color: #ccc;
+export const TableBodyEmptyCell = styled.td`
+  background-color: #eee;
   padding: 20px;
   text-align: center;
-  border-radius: 0 0 15px 15px;
+  border-radius: 0 0 8px 8px;
 `
 

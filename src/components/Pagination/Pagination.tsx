@@ -35,8 +35,8 @@ export function Pagination({
                 key={isClickable ? page : `ellipsis-on-${index}`}
                 aria-label={isClickable ? `Go to page ${page}` : 'Page interval'}
                 onClick={isClickable ? () => onChange(page as number) : () => { }}
-                active={page === active}
-                clickable={isClickable}
+                data-disabled={!isClickable}
+                data-selected={page === active}
               >
                 {page}
               </PaginationItem>
