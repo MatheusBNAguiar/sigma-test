@@ -12,7 +12,7 @@ const AppContainer = styled.div`
   height: 100%;
   max-height: 90vh;
   margin: 12px 20px;
-  padding: 16px;
+  padding: 20px;
   border-radius: 8px;
   overflow: auto;
   

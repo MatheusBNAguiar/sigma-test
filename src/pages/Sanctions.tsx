@@ -1,6 +1,9 @@
+import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react"
 import { SanctionsApi } from "../core/Sanctions/Sanctions.api"
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '../components/Table';
+import { Title } from '../components/Text'
+import { EnterIcon } from '../components/Icons/EnterIcon'
 import type { SanctionList } from "../core/Sanctions/Sanctions.types"
 
 export function Sanctions() {
@@ -9,30 +12,34 @@ export function Sanctions() {
     SanctionsApi.getSanctionsList().then(setSanctionList)
   }, [])
   return (
-    <pre>
-      SAnction list {JSON.stringify(sanctionList, null, 2)}
+    <div>
+      <Title>Sanctions</Title>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableCell>Coluna 1</TableCell>
-            <TableCell></TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Sanctioned Status</TableCell>
+            <TableCell>Matching Alias</TableCell>
+            <TableCell />
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell>Dado 1</TableCell>
-            <TableCell>Dado 2</TableCell>
-            <TableCell>Dado 3</TableCell>
-            <TableCell>Dado 4</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Dado 5</TableCell>
-            <TableCell>Dado 6</TableCell>
-            <TableCell>Dado 7</TableCell>
-            <TableCell>Dado 8</TableCell>
-          </TableRow>
+          {
+            sanctionList.map(sanction => (
+              <TableRow key={sanction.id}>
+                <TableCell >{sanction.primaryName}</TableCell>
+                <TableCell>{sanction.ended ? 'Ended' : 'Issued'}</TableCell>
+                <TableCell>Dado 3</TableCell>
+                <TableCell>
+                  <Link to={`/sanctions/${sanction.id}`}>
+                    <EnterIcon />
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))
+          }
         </TableBody>
       </Table>
-    </pre>
+    </div>
   )
 }
