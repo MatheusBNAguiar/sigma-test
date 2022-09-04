@@ -5,26 +5,33 @@ export const PaginationContainer = styled.nav`
 `
 
 export const IndexesContainer = styled.div`
-  min-height: 40px;
-  padding: 0px 10px;
-  margin-left: 10px;
-  background-color: #ccc;
-  border-radius: 20px;
-  span {
-    color: black;
-    margin: 0 8px;
-    cursor: pointer;
-    user-select: none;
-  }
+  padding: 12px 0;
+  border-radius: 12px;
+  margin: 4px auto;
+  display: flex;
+  gap: 4px;
 `
 
-type PaginationItemProps = { active: boolean; clickable: boolean }
-
-export const PaginationItem = styled.span<PaginationItemProps>`
+export const PaginationItem = styled.span`
+  color: black;
+  cursor: pointer;
+  user-select: none;
   width: 32px;
   height: 32px;
-  margin: 0 !important;
   border-radius: 100%;
-  background-color: white;
-  box-shadow: 0px 0px 4px #00000014;
+  text-align: center;
+  
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &[data-selected="true"]{
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.9);
+  }
+
+  &[data-disabled="true"]{
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 `

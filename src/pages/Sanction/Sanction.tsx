@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from "react-router-dom"
+import React from 'react'
 import styled from "@emotion/styled";
-import { SanctionWithAlias } from '../core/Sanctions/Sanctions.types'
-import { SanctionsApi } from '../core/Sanctions/Sanctions.api'
-import { SubTitle, Title } from '../components/Text';
-import { formatDate } from '../utils/date';
-import { isError, useQuery } from '@tanstack/react-query';
-import { Spinner } from '../components/Spinner';
+import { useQuery } from '@tanstack/react-query';
+import { useNavigate, useParams } from "react-router-dom"
+import { SanctionsApi } from '../../core/Sanctions/Sanctions.api'
+import { SubTitle, Title } from '../../components/Text';
+import { formatDate } from '../../utils/date';
+import { Spinner } from '../../components/Spinner';
 
 const SanctionHeading = styled.section`
 padding-bottom: 1rem;
@@ -92,7 +91,7 @@ export function Sanction() {
           sanction.aliases.map((alias) => (
             <SanctionAlias key={alias.id} role='button' onClick={() => {
               navigate(`/sanctions?${new URLSearchParams({
-                alias: alias.alias.toLocaleLowerCase()
+                alias: alias.alias.toLowerCase()
               })}`)
             }}>
               {alias.alias}
