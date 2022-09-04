@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Table = styled.table`
   background-color: white;
@@ -9,7 +9,7 @@ export const Table = styled.table`
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 10px;
-`
+`;
 
 export const TableCell = styled.td`
   font-size: 14px;
@@ -31,9 +31,9 @@ export const TableCell = styled.td`
   &:first-of-type {
     border-radius: 10px 0 0 10px;
   }
-`
+`;
 
-export const TableHeader = styled.thead``
+export const TableHeader = styled.thead``;
 
 export const TableRow = styled.tr`
   td:first-of-type {
@@ -42,8 +42,7 @@ export const TableRow = styled.tr`
   td:last-of-type {
     border-radius: 0px 10px 10px 0px;
   }
-`
-
+`;
 
 export const TableBody = styled.tbody`
   tr:nth-of-type(even) {
@@ -51,12 +50,11 @@ export const TableBody = styled.tbody`
       background-color: #ccc;
     }
   }
-`
+`;
 
 export const TableBodyEmptyCell = styled.td`
   background-color: #eee;
   padding: 20px;
   text-align: center;
   border-radius: 0 0 8px 8px;
-`
-
+`;
