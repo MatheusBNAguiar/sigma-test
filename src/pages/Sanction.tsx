@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import styled from "@emotion/styled";
 import { SanctionWithAlias } from '../core/Sanctions/Sanctions.types'
 import { SanctionsApi } from '../core/Sanctions/Sanctions.api'
@@ -55,6 +55,7 @@ const SanctionNotFound = styled.div`
 
 export function Sanction() {
   const { sanctionId } = useParams()
+  const navigate = useNavigate()
 
   const { data: sanction, isLoading, isError, refetch } = useQuery(["sanction", sanctionId], () => {
     if (sanctionId) {
@@ -62,8 +63,6 @@ export function Sanction() {
     }
     return null
   }, { retry: false });
-
-  console.log(isLoading, isError)
 
   if (isLoading) {
     return <Spinner />
@@ -91,13 +90,16 @@ export function Sanction() {
       <SanctionAliases>
         {
           sanction.aliases.map((alias) => (
-            <SanctionAlias key={alias.id} role='button'>
+            <SanctionAlias key={alias.id} role='button' onClick={() => {
+              navigate(`/sanctions?${new URLSearchParams({
+                alias: alias.alias.toLocaleLowerCase()
+              })}`)
+            }}>
               {alias.alias}
             </SanctionAlias>
           ))
         }
       </SanctionAliases>
-
     </div>
   )
 }
