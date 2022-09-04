@@ -5,6 +5,8 @@ import { SanctionWithAlias } from '../core/Sanctions/Sanctions.types'
 import { SanctionsApi } from '../core/Sanctions/Sanctions.api'
 import { SubTitle, Title } from '../components/Text';
 import { formatDate } from '../utils/date';
+import { isError, useQuery } from '@tanstack/react-query';
+import { Spinner } from '../components/Spinner';
 
 const SanctionHeading = styled.section`
 padding-bottom: 1rem;
@@ -42,18 +44,33 @@ const SanctionAlias = styled.div`
   }
 `
 
+const SanctionNotFound = styled.div`
+  font-size: 4rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  display: flex;
+`
+
 export function Sanction() {
   const { sanctionId } = useParams()
-  const [sanction, setSanction] = useState<SanctionWithAlias>()
 
-  useEffect(() => {
+  const { data: sanction, isLoading, isError, refetch } = useQuery(["sanction", sanctionId], () => {
     if (sanctionId) {
-      SanctionsApi.getExpandedSanctionById(sanctionId).then(setSanction)
+      return SanctionsApi.getExpandedSanctionById(sanctionId)
     }
-  }, [sanctionId])
-
-  if (!sanction) {
     return null
+  }, { retry: false });
+
+  console.log(isLoading, isError)
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  if (isError || !sanction) {
+    return <SanctionNotFound>Sanction not found</SanctionNotFound>
   }
 
   return (

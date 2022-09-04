@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 import React from 'react'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Sanction } from './pages/Sanction';
 import { Sanctions } from './pages/Sanctions';
@@ -38,18 +42,24 @@ const AppContainer = styled.div`
   }
 `
 
+
+const queryClient = new QueryClient()
+
 export default function App() {
   return (
+
     <AppContainer>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="sanctions" >
-            <Route index element={<Sanctions />} />
-            <Route path=":sanctionId" element={<Sanction />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="sanctions" >
+              <Route index element={<Sanctions />} />
+              <Route path=":sanctionId" element={<Sanction />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
     </AppContainer>
   )
 }

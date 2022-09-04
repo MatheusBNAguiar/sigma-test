@@ -4,16 +4,22 @@ import { SanctionsApi } from "../core/Sanctions/Sanctions.api"
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '../components/Table';
 import { Title } from '../components/Text'
 import { EnterIcon } from '../components/Icons/EnterIcon'
+import { Input } from '../components/Input'
 import type { SanctionList } from "../core/Sanctions/Sanctions.types"
 
 export function Sanctions() {
   const [sanctionList, setSanctionList] = useState<SanctionList>([])
+
   useEffect(() => {
     SanctionsApi.getSanctionsList().then(setSanctionList)
   }, [])
+
   return (
     <div>
       <Title>Sanctions</Title>
+      <div>
+        <Input placeholder="Search by its alias" />
+      </div>
       <Table>
         <TableHeader>
           <TableRow>
