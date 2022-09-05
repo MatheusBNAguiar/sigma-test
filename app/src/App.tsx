@@ -3,7 +3,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Sanction } from './pages/Sanction/Sanction';
-import { Sanctions } from './pages/Sanctions';
+import { Sanctions } from './pages/Sanctions/Sanctions';
 
 const AppContainer = styled.div`
   flex: 1;
