@@ -14,11 +14,11 @@ type AliasSanctionTableProps = {
 
 function SanctionsResults({ data, status, onRetry }: AliasSanctionTableProps) {
   if (status === 'error') {
-    return <ErrorStatus message="Search request failed" onRetry={onRetry} />;
+    return <TableBodyEmptyCell colSpan={100}><ErrorStatus message="Search request failed" onRetry={onRetry} /></TableBodyEmptyCell>;
   }
 
   if (status === 'loading') {
-    return <LoadingStatus />;
+    return <TableBodyEmptyCell colSpan={100}><LoadingStatus /></TableBodyEmptyCell>;
   }
 
   if (!data || data?.length === 0) {

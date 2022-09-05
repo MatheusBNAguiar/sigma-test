@@ -7,21 +7,24 @@ services:
       dockerfile: Dockerfile
     stdin_open: true
     tty: true
-    ports:
-      - "3000:80"
     volumes:
       - ./stubs:/stubs
-    command: -p 80 --middlewares randomize.js --watch db.js    
+    command: [
+      --host,         0.0.0.0,
+      --port,         "80",
+      --middlewares,  randomize.js,
+      --watch,        db.js
+    ]
+    ports:
+      - "8080:80"
     environment:
       - FAILURE_RATE=0.1
       - MIN_DELAY_MS=0
       - MAX_DELAY_MS=3000
 
-  app:
-    build:
-      context: app
-      dockerfile: Dockerfile
-    depends_on:
-      - api
-    ports:
-      - "4000:80"
+  # app:
+  #   build:
+  #     context: app
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - api

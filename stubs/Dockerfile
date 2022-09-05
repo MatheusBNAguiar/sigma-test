@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:12-alpine
 
 RUN npm install --global json-server
 WORKDIR /stubs

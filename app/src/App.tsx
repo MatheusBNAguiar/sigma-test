@@ -39,6 +39,8 @@ const AppContainer = styled.div`
   }
 `;
 
+console.log(import.meta.env.API_BASE_URL)
+
 const queryClient = new QueryClient();
 
 export default function App() {

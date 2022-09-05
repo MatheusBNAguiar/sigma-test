@@ -14,5 +14,5 @@ export function useSanctionInput() {
 
   const alias = useDebounceValue(value, INPUT_DEBOUNCE_DELAY);
 
-  return { alias, onInputChange };
+  return { value, alias, onInputChange };
 }

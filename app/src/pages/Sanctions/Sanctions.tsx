@@ -7,13 +7,13 @@ import { AliasSanctionTable } from './AliasSanctionTable';
 import { useAliasSanctions } from './hooks/useAliasSanctions';
 
 export function Sanctions() {
-  const { alias, onInputChange } = useSanctionInput();
+  const { value, alias, onInputChange } = useSanctionInput();
   const { page, pages, onPageChange, status, data, refetch } = useAliasSanctions(alias);
 
   return (
     <div>
       <Title>Sanctions</Title>
-      <Input placeholder="Search by its alias" onChange={onInputChange} value={alias} />
+      <Input placeholder="Search by its alias" onChange={onInputChange} value={value} />
       <AliasSanctionTable data={data} status={status} onRetry={refetch} />
       <Pagination quantity={pages} active={page} onChange={onPageChange} />
     </div>
