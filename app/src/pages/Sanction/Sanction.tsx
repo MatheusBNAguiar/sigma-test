@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { SanctionsApi } from '../../core/Sanctions/Sanctions.api';
 import { SubTitle, Title } from '../../components/Text';
 import { formatDate } from '../../utils/date';
@@ -17,7 +17,6 @@ import { Button } from '../../components/Button';
 
 export function Sanction() {
   const { sanctionId } = useParams();
-  const navigate = useNavigate();
 
   const {
     status,
@@ -54,7 +53,9 @@ export function Sanction() {
     return (
       <SanctionStatusContainer>
         Sanction not found
-        <Button>Return to list</Button>
+        <Link to={'/sanctions'}>
+          <Button>Return to list</Button>
+        </Link>
       </SanctionStatusContainer>
     );
   }
@@ -78,19 +79,14 @@ export function Sanction() {
       <SubTitle>Aliases</SubTitle>
       <SanctionAliases>
         {sanction.aliases.map(alias => (
-          <SanctionAlias
+          <Link
             key={alias.id}
-            role="button"
-            onClick={() => {
-              navigate(
-                `/sanctions?${new URLSearchParams({
-                  alias: alias.alias.toLowerCase(),
-                })}`,
-              );
-            }}
+            to={`/sanctions?${new URLSearchParams({
+              alias: alias.alias.toLowerCase(),
+            })}`}
           >
-            {alias.alias}
-          </SanctionAlias>
+            <SanctionAlias role="button">{alias.alias}</SanctionAlias>
+          </Link>
         ))}
       </SanctionAliases>
     </div>

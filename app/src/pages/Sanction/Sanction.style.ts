@@ -40,6 +40,8 @@ export const SanctionStatusContainer = styled.div`
   font-size: 4rem;
   align-items: center;
   display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   justify-content: center;
   height: 100%;
   display: flex;
