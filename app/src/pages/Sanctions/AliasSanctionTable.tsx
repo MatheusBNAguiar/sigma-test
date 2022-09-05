@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHeader, TableRow, TableBodyEmptyCell 
 import { ExpandedAlias } from '../../core/Aliases/Aliases.types';
 import { ErrorStatus, LoadingStatus } from '../../components/LoadStatus';
 import { EnterIcon } from '../../components/Icons/EnterIcon';
+import styled from '@emotion/styled';
 
 type AliasSanctionTableProps = {
   status: 'error' | 'loading' | 'success';
@@ -13,19 +14,11 @@ type AliasSanctionTableProps = {
 
 function SanctionsResults({ data, status, onRetry }: AliasSanctionTableProps) {
   if (status === 'error') {
-    return (
-      <TableBodyEmptyCell colSpan={100}>
-        <ErrorStatus message="Search request failed" onRetry={onRetry} />
-      </TableBodyEmptyCell>
-    );
+    return <ErrorStatus message="Search request failed" onRetry={onRetry} />;
   }
 
   if (status === 'loading') {
-    return (
-      <TableBodyEmptyCell colSpan={100}>
-        <LoadingStatus />
-      </TableBodyEmptyCell>
-    );
+    return <LoadingStatus />;
   }
 
   if (!data || data?.length === 0) {
@@ -50,20 +43,36 @@ function SanctionsResults({ data, status, onRetry }: AliasSanctionTableProps) {
   );
 }
 
+const TableResponsiveContainer = styled.div`
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+
+  table {
+    min-width: 620px;
+
+    &[data-status-prompt='true'] {
+      min-width: 100%;
+    }
+  }
+`;
+
 export function AliasSanctionTable({ data, status, onRetry }: AliasSanctionTableProps) {
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell>Sanctioned Status</TableCell>
-          <TableCell>Matching Alias</TableCell>
-          <TableCell />
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <SanctionsResults data={data} status={status} onRetry={onRetry} />
-      </TableBody>
-    </Table>
+    <TableResponsiveContainer>
+      <Table data-status-prompt={status !== 'success'}>
+        <TableHeader>
+          <TableRow>
+            <TableCell style={{ width: '40%' }}>Name</TableCell>
+            <TableCell style={{ width: '25%' }}>Sanctioned Status</TableCell>
+            <TableCell style={{ width: '30%' }}>Matching Alias</TableCell>
+            <TableCell style={{ width: '5%' }} />
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <SanctionsResults data={data} status={status} onRetry={onRetry} />
+        </TableBody>
+      </Table>
+    </TableResponsiveContainer>
   );
 }

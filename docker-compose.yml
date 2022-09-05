@@ -8,10 +8,10 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - "3000:8080"
+      - "3000:80"
     volumes:
       - ./stubs:/stubs
-    command: -p 8080 --middlewares randomize.js --watch db.js    
+    command: -p 80 --middlewares randomize.js --watch db.js    
     environment:
       - FAILURE_RATE=0.1
       - MIN_DELAY_MS=0

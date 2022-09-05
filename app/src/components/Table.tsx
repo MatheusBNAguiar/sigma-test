@@ -12,7 +12,7 @@ export const Table = styled.table`
 `;
 
 export const TableCell = styled.td`
-  font-size: 14px;
+  font-size: 1rem;
   vertical-align: middle;
   text-align: left;
   background: white;
@@ -55,7 +55,7 @@ export const TableBody = styled.tbody`
 export const TableBodyEmptyCell = styled(TableCell)`
   background-color: #eee;
   font-size: 1.25rem;
-  padding: 20px;
+  padding: 1.25rem;
   text-align: center;
   border-radius: 0 0 8px 8px;
 `;

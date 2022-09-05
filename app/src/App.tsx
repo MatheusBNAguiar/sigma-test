@@ -12,8 +12,8 @@ const AppContainer = styled.div`
   max-width: 1268px;
   height: 100%;
   max-height: 90vh;
-  margin: 12px 20px;
-  padding: 20px;
+  margin: 0.75rem 1.25rem;
+  padding: 1.25rem;
   border-radius: 8px;
   overflow: auto;
 
@@ -21,7 +21,7 @@ const AppContainer = styled.div`
   scrollbar-color: #ccc transparent;
 
   &::-webkit-scrollbar {
-    width: 12px;
+    width: 0.75rem;
   }
 
   &::-webkit-scrollbar-track {
@@ -31,7 +31,7 @@ const AppContainer = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border-radius: 10px;
-    border: 3px solid transparent;
+    border: 4px solid transparent;
   }
 
   ::-webkit-scrollbar-thumb:hover {

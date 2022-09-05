@@ -11,6 +11,7 @@ const SpinnerContainer = styled.div`
     transform-origin: 40px 40px;
     animation: lds-spinner 1.2s linear infinite;
   }
+
   div:after {
     content: ' ';
     display: block;
@@ -22,6 +23,7 @@ const SpinnerContainer = styled.div`
     border-radius: 20%;
     background: #ccc;
   }
+
   div:nth-child(1) {
     transform: rotate(0deg);
     animation-delay: -1.1s;
