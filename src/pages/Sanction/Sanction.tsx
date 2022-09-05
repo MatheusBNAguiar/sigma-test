@@ -1,65 +1,20 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { SanctionsApi } from '../../core/Sanctions/Sanctions.api';
 import { SubTitle, Title } from '../../components/Text';
 import { formatDate } from '../../utils/date';
-import { Spinner } from '../../components/Spinner';
-
-const SanctionHeading = styled.section`
-  padding-bottom: 1rem;
-`;
-
-const SanctionDetails = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`;
-
-const SanctionState = styled.div`
-  font-weight: bold;
-  font-size: 1.25rem;
-  span {
-    font-size: 1rem;
-    font-weight: normal;
-  }
-`;
-
-const SanctionAliases = styled.div`
-  display: grid;
-`;
-
-const SanctionAlias = styled.div`
-  font-size: 1.25rem;
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ccc;
-  margin: 10px 0;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
-  }
-`;
-
-const SanctionNotFound = styled.div`
-  font-size: 4rem;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  display: flex;
-`;
+import { ErrorStatus, LoadingStatus } from '../../components/LoadStatus';
+import { SanctionHeading, SanctionDetails, SanctionState, SanctionAliases, SanctionAlias, SanctionStatusContainer } from './Sanction.style'
+import { Button } from '../../components/Button';
 
 export function Sanction() {
   const { sanctionId } = useParams();
   const navigate = useNavigate();
 
   const {
+    status,
     data: sanction,
-    isLoading,
-    isError,
     refetch,
   } = useQuery(
     ['sanction', sanctionId],
@@ -72,12 +27,28 @@ export function Sanction() {
     { retry: false },
   );
 
-  if (isLoading) {
-    return <Spinner />;
+
+  if (status === 'error') {
+    return (
+      <SanctionStatusContainer>
+        <ErrorStatus message="Sanction API returned an error" onRetry={refetch} />
+      </SanctionStatusContainer>
+    );
   }
 
-  if (isError || !sanction) {
-    return <SanctionNotFound>Sanction not found</SanctionNotFound>;
+  if (status === 'loading') {
+    return (
+      <SanctionStatusContainer>
+        <LoadingStatus />
+      </SanctionStatusContainer>
+    );
+  }
+
+  if (!sanction) {
+    return <SanctionStatusContainer>
+      Sanction not found
+      <Button>Return to list</Button>
+    </SanctionStatusContainer>;
   }
 
   return (

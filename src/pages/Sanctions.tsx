@@ -1,5 +1,5 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHeader, TableRow, TableBodyEmptyCell } from '../components/Table';
 import { Title } from '../components/Text';
 import { EnterIcon } from '../components/Icons/EnterIcon';
@@ -9,16 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Pagination } from '../components/Pagination/Pagination';
 import { useSanctionInput } from './Sanction/useSanctionInput';
 import { ExpandedAlias } from '../core/Aliases/Aliases.types';
-import { Spinner } from '../components/Spinner';
-import { Button } from '../components/Button';
-import styled from '@emotion/styled';
 import { ErrorStatus, LoadingStatus } from '../components/LoadStatus';
-
-const StatusContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`
 
 const SanctionsResults = ({
   data,
@@ -32,7 +23,7 @@ const SanctionsResults = ({
   if (status === 'error') {
     return (
       <TableBodyEmptyCell colSpan={100}>
-        <ErrorStatus message='Search request failed' onRetry={onRetry} />
+        <ErrorStatus message="Search request failed" onRetry={onRetry} />
       </TableBodyEmptyCell>
     );
   }

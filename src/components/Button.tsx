@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Button = styled.button`
   font-size: 1rem;
@@ -6,4 +6,4 @@ export const Button = styled.button`
   width: auto;
   font-weight: bold;
   min-width: 300px;
-`
+`;

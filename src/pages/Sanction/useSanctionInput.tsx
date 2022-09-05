@@ -12,7 +12,7 @@ export function useSanctionInput() {
     setSearchParams({ [ALIAS_KEY]: event.target?.value?.toLowerCase() });
   };
 
-  const alias = useDebounceValue(value, INPUT_DEBOUNCE_DELAY)
+  const alias = useDebounceValue(value, INPUT_DEBOUNCE_DELAY);
 
   return { alias, onInputChange };
 }
