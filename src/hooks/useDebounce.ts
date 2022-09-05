@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-export function useDebounce(delay): [(listener: () => unknown, forcedDelay?: number) => void, () => void] {
-  const timeoutRef = useRef<number>();
+type DebounceFunction = (listener: () => unknown, forcedDelay?: number) => void;
 
-  const debounce = useCallback(
-    (listener: () => unknown, forcedDelay?: number) => {
+export function useDebounce(delay: number): [DebounceFunction, () => void] {
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const debounce = useCallback<DebounceFunction>(
+    (listener, forcedDelay) => {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(listener, forcedDelay || delay);
     },

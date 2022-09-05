@@ -9,7 +9,7 @@ export const SanctionsApi = {
       if (resp.status >= 200 && resp.status < 300) {
         return resp.json();
       } else if (resp.status === 404) {
-        return null
+        return null;
       } else {
         throw resp.statusText;
       }

@@ -5,7 +5,14 @@ import { SanctionsApi } from '../../core/Sanctions/Sanctions.api';
 import { SubTitle, Title } from '../../components/Text';
 import { formatDate } from '../../utils/date';
 import { ErrorStatus, LoadingStatus } from '../../components/LoadStatus';
-import { SanctionHeading, SanctionDetails, SanctionState, SanctionAliases, SanctionAlias, SanctionStatusContainer } from './Sanction.style'
+import {
+  SanctionHeading,
+  SanctionDetails,
+  SanctionState,
+  SanctionAliases,
+  SanctionAlias,
+  SanctionStatusContainer,
+} from './Sanction.style';
 import { Button } from '../../components/Button';
 
 export function Sanction() {
@@ -27,7 +34,6 @@ export function Sanction() {
     { retry: false },
   );
 
-
   if (status === 'error') {
     return (
       <SanctionStatusContainer>
@@ -45,10 +51,12 @@ export function Sanction() {
   }
 
   if (!sanction) {
-    return <SanctionStatusContainer>
-      Sanction not found
-      <Button>Return to list</Button>
-    </SanctionStatusContainer>;
+    return (
+      <SanctionStatusContainer>
+        Sanction not found
+        <Button>Return to list</Button>
+      </SanctionStatusContainer>
+    );
   }
 
   return (

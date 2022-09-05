@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const SanctionHeading = styled.section`
   padding-bottom: 1rem;
@@ -44,5 +44,3 @@ export const SanctionStatusContainer = styled.div`
   height: 100%;
   display: flex;
 `;
-
-

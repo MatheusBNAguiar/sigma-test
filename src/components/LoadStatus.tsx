@@ -16,9 +16,7 @@ export function LoadingStatus() {
       <div>
         <Spinner />
       </div>
-      <div>
-        Loading
-      </div>
+      <div>Loading</div>
     </StatusContainer>
   );
 }
@@ -26,9 +24,7 @@ export function LoadingStatus() {
 export function ErrorStatus({ message = '', onRetry }) {
   return (
     <StatusContainer>
-      <div>
-        {message}
-      </div>
+      <div>{message}</div>
       <div>
         <Button onClick={onRetry}>Retry</Button>
       </div>

@@ -11,7 +11,7 @@ type PaginationProps = {
   itemRange?: number;
 };
 
-export function Pagination({ quantity = 1, active = 1, itemRange = 1, onChange = () => { } }: PaginationProps) {
+export function Pagination({ quantity = 1, active = 1, itemRange = 1, onChange = () => {} }: PaginationProps) {
   const availablePages = useMemo(() => buildPagesSequence(active, itemRange, quantity), [active, itemRange, quantity]);
 
   if (!quantity) {
@@ -27,7 +27,7 @@ export function Pagination({ quantity = 1, active = 1, itemRange = 1, onChange =
             <PaginationItem
               key={isClickable ? page : `ellipsis-on-${index}`}
               aria-label={isClickable ? `Go to page ${page}` : 'Page interval'}
-              onClick={isClickable ? () => onChange(page as number) : () => { }}
+              onClick={isClickable ? () => onChange(page as number) : () => {}}
               data-disabled={!isClickable}
               aria-current={page === active}
             >
