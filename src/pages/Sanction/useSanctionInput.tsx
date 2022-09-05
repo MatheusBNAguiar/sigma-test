@@ -1,25 +1,18 @@
 import { useSearchParams } from 'react-router-dom';
-import { useDebounce } from '../../hooks/useDebounce';
+import { useDebounceValue } from '../../hooks/useDebounceValue';
 
 const INPUT_DEBOUNCE_DELAY = 200;
 const ALIAS_KEY = 'alias';
 
 export function useSanctionInput() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const alias = searchParams.get(ALIAS_KEY) || '';
-
-  const [debounceInput] = useDebounce(INPUT_DEBOUNCE_DELAY);
+  const value = searchParams.get(ALIAS_KEY) || '';
 
   const onInputChange = event => {
-    const value = event.target?.value?.toLowerCase();
-    if (!value) {
-      setSearchParams({ [ALIAS_KEY]: value });
-    } else {
-      debounceInput(() => {
-        setSearchParams({ [ALIAS_KEY]: value });
-      });
-    }
+    setSearchParams({ [ALIAS_KEY]: event.target?.value?.toLowerCase() });
   };
+
+  const alias = useDebounceValue(value, INPUT_DEBOUNCE_DELAY)
 
   return { alias, onInputChange };
 }

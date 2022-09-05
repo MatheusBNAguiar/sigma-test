@@ -75,7 +75,7 @@ module.exports = () => {
       { "id": 103, "primaryName": "Abou Ali", "issued": "2003-03-01T22:24:11.602Z" },
       { "id": 104, "primaryName": "Popular Credit Bank", "issued": "2010-10-31T22:24:11.602Z" },
       { "id": 105, "primaryName": "Université Malek Ashtar", "issued": "2015-11-27T22:24:11.602Z" },
-      { "id": 106, "primaryName": "οργάνωση Al-Qaida στην Αραβική Χερσόνησο", "issued": "1990-08-02T22:24:11.602Z"  }
+      { "id": 106, "primaryName": "οργάνωση Al-Qaida στην Αραβική Χερσόνησο", "issued": "1990-08-02T22:24:11.602Z" }
     ]
   };
 

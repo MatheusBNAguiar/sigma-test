@@ -10,6 +10,15 @@ import { Pagination } from '../components/Pagination/Pagination';
 import { useSanctionInput } from './Sanction/useSanctionInput';
 import { ExpandedAlias } from '../core/Aliases/Aliases.types';
 import { Spinner } from '../components/Spinner';
+import { Button } from '../components/Button';
+import styled from '@emotion/styled';
+import { ErrorStatus, LoadingStatus } from '../components/LoadStatus';
+
+const StatusContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
 
 const SanctionsResults = ({
   data,
@@ -23,8 +32,7 @@ const SanctionsResults = ({
   if (status === 'error') {
     return (
       <TableBodyEmptyCell colSpan={100}>
-        Search failed
-        <button onClick={onRetry}>Retry</button>
+        <ErrorStatus message='Search request failed' onRetry={onRetry} />
       </TableBodyEmptyCell>
     );
   }
@@ -32,14 +40,13 @@ const SanctionsResults = ({
   if (status === 'loading') {
     return (
       <TableBodyEmptyCell colSpan={100}>
-        <Spinner />
-        Loading
+        <LoadingStatus />
       </TableBodyEmptyCell>
     );
   }
 
   if (!data || data?.length === 0) {
-    return <TableBodyEmptyCell colSpan={100}>lalala</TableBodyEmptyCell>;
+    return <TableBodyEmptyCell colSpan={100}>No sanctions were found for this alias</TableBodyEmptyCell>;
   }
 
   return (
@@ -97,9 +104,7 @@ export function Sanctions() {
           <SanctionsResults data={data} status={status} onRetry={refetch} />
         </TableBody>
       </Table>
-      <div>
-        <Pagination quantity={pages} active={page} onChange={setPage} />
-      </div>
+      <Pagination quantity={pages} active={page} onChange={setPage} />
     </div>
   );
 }

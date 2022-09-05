@@ -52,8 +52,9 @@ export const TableBody = styled.tbody`
   }
 `;
 
-export const TableBodyEmptyCell = styled.td`
+export const TableBodyEmptyCell = styled(TableCell)`
   background-color: #eee;
+  font-size: 1.25rem;
   padding: 20px;
   text-align: center;
   border-radius: 0 0 8px 8px;
