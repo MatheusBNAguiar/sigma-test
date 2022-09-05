@@ -8,7 +8,7 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - "8080:8080"
+      - "3000:8080"
     volumes:
       - ./stubs:/stubs
     command: -p 8080 --middlewares randomize.js --watch db.js    
@@ -17,9 +17,11 @@ services:
       - MIN_DELAY_MS=0
       - MAX_DELAY_MS=3000
 
-  # app:
-  #   build:
-  #     context: app
-  #     dockerfile: Dockerfile
-  #   depends_on:
-  #     - api
+  app:
+    build:
+      context: app
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+    ports:
+      - "4000:80"
