@@ -1,6 +1,10 @@
 .PHONY: all setup run test
 
-all: | setup test run;
+all: | prepare setup run;
+
+prepare: 
+	npm install
+	cd app && npm install
 
 setup:
 	docker-compose build
