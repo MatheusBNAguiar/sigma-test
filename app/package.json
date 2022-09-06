@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "test": "vitest",
-    "test:e2e": "cypress",
+    "test:e2e": "cypress run",
     "test:coverage": "vitest --watch --coverage",
     "test:ui": "vitest --watch --coverage --ui",
     "test:watch": "vitest --watch"

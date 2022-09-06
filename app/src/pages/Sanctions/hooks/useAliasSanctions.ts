@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AliasesApi } from '../../../core/Aliases/Aliases.api';
 
 export function useAliasSanctions(alias) {
@@ -8,25 +8,29 @@ export function useAliasSanctions(alias) {
 
   const { status, data, refetch } = useQuery(
     ['aliases', page, alias],
-    () =>
-      AliasesApi.getPaginatedAliases(page, alias).then(({ pages, list }) => {
-        setPages(prev => {
-          if (prev > pages) {
-            setPage(1);
-          }
-          return pages;
-        });
-        return list;
-      }),
+    () => AliasesApi.getPaginatedAliases(page, alias),
     { retry: false },
   );
+
+  const { pages: apiPages, list = [] } = data || {};
+
+  useEffect(() => {
+    if (apiPages) {
+      setPages(prev => {
+        if (prev > apiPages) {
+          setPage(1);
+        }
+        return apiPages;
+      });
+    }
+  }, [apiPages]);
 
   return {
     page,
     pages,
     onPageChange: setPage,
     status,
-    data,
+    data: list,
     refetch,
   };
 }

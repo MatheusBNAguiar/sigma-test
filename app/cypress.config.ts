@@ -13,7 +13,7 @@ export default defineConfig({
   fileServerFolder: 'dist',
   fixturesFolder: false,
   e2e: {
-    baseUrl: 'http://localhost:5173/',
+    baseUrl: 'http://localhost:8080/',
     setupNodeEvents(on) {
       const __filename = fileURLToPath(import.meta.url);
       const __dirname = dirname(__filename);
