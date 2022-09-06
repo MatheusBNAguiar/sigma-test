@@ -12,6 +12,23 @@ The focus should be on utility and usability, not on aesthetics, though some bas
 
 Our hypothetical user is a compliance officer who is investigating suspicious transactions by searching for the unknown party's name and exploring the results to determine which seems like the most likely match.
 
+## Test Execution
+
+On this project I used Vite to have a full experience on building and developing, usually I just use Rollup to build libraries but as it is related to a web page I ended up using Vite to have HMR and some helpers. To maintain a good codebase I used eslint and prettier to have some good code consistency, also to enforce this a bit more I've added husky and lint-staged to enforce those rules on pre-commit stage.
+
+On the code best practices I usually find easier to implement on a certain structure of code:
+- Components: All the non specific visual stuff with as few as logic on it, usually using storybook to make a handsoff and visual testing easier;
+- Core: Every part that involves external data and some business rules I put it on core, usually having api requests, mappers for the inside and outside of the application and external typings, this way decoupling the external logic from the app
+- Hooks and Utils: Functions and hooks to help on development, on this case I used a function to format a Date to a specific format, not needing to pass the same parameters to everything, and also a debounce hook for the input form;
+- Pages: It would be the last level of abstraction before bundling everything on App.tsx, it can have specific components to the view, specific hooks to abstract functionalities and the final view to group them all;
+
+Regarding some of the tools added and the reason for them all:
+
+- emotion: For CSS I usually use emotion, some teams use styled-components, as it delivers a good typing experience and also it feels natural with SCSS included. I usually do not CSS modules due to some lack of typing and sometimes it being confusing with its inherited Ids on bundling. One critique of @emotion that can be done is the run time instead of build time way of working, making it a bit hard on big projects for the first pain;
+- Jest and Cypress: Common tools for developing component and e2e testing, to me Cypress was new so I've added a simple example of what I imagined to a test;
+- react-query: Pretty straightforward tool for query management, as it already returns all the steps of a query process, it was a way of developing faster with the states needed but it could be done just with useReducer easily;
+- React states: On this project I did not use any state managers libraries as the project was not complex on state management per say, usually I use something like [jotai](!https://jotai.org/) and [zustand](https://github.com/pmndrs/zustand)
+
 ## Important
 
 A couple notes to hopefully help make this a low-stress experience:
