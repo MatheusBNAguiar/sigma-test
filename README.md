@@ -29,6 +29,9 @@ Regarding some of the tools added and the reason for them all:
 - react-query: Pretty straightforward tool for query management, as it already returns all the steps of a query process, it was a way of developing faster with the states needed but it could be done just with useReducer easily;
 - React states: On this project I did not use any state managers libraries as the project was not complex on state management per say, usually I use something like [jotai](!https://jotai.org/) and [zustand](https://github.com/pmndrs/zustand)
 
+### Setup App
+Run `make prepare` to setup the environment
+
 ### Executing tests
 To test components you should just run `make test-component`, but for the e2e process you need to run:
 ```sh
