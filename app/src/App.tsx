@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Sanction } from './pages/Sanction/Sanction';
 import { Sanctions } from './pages/Sanctions/Sanctions';
+import { css, Global } from '@emotion/react';
 
-const AppContainer = styled.div`
+export const AppContainer = styled.div`
   flex: 1;
   background-color: white;
   width: 100%;
@@ -39,17 +40,72 @@ const AppContainer = styled.div`
   }
 `;
 
-console.log(import.meta.env.API_BASE_URL)
+const globalStyle = css`
+  :root {
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: #213547;
+    background-color: #242424;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    :root {
+      font-size: 12px;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+  }
+  a:hover {
+    color: #535bf2;
+  }
+
+  body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+
+  #root {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+export const GlobalStyle = () => <Global styles={globalStyle} />;
 
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
     <AppContainer>
+      <GlobalStyle />
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<App />} />
+            <Route path="/" element={<Navigate to="/sanctions" />} />
             <Route path="sanctions">
               <Route index element={<Sanctions />} />
               <Route path=":sanctionId" element={<Sanction />} />
