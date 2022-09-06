@@ -13,7 +13,7 @@ export function Sanctions() {
   return (
     <div>
       <Title>Sanctions</Title>
-      <Input placeholder="Search by its alias" onChange={onInputChange} value={value} />
+      <Input placeholder="Search sanctions by its alias" onChange={onInputChange} value={value} />
       <AliasSanctionTable data={data} status={status} onRetry={refetch} />
       <Pagination quantity={pages} active={page} onChange={onPageChange} />
     </div>
