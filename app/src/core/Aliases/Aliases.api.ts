@@ -1,3 +1,4 @@
+import { API_ROUTE } from '../../globals';
 import { PaginatedExpandedAliasList } from './Aliases.types';
 
 export const AliasesApi = {
@@ -7,7 +8,7 @@ export const AliasesApi = {
       _expand: 'sanction',
       ...(query ? { q: query } : {}),
     }).toString();
-    return fetch(`http://localhost:3000/aliases?${queryParams}`).then(async resp => {
+    return fetch(`${API_ROUTE}aliases?${queryParams}`).then(async resp => {
       if (resp.status >= 200 && resp.status < 300) {
         const itemCount = (resp.headers.get('X-Total-Count') as unknown as number) || 0;
         const list = await resp.json();

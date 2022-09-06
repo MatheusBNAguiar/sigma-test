@@ -4,8 +4,8 @@
     "useDefineForClassFields": true,
     "lib": [
       "DOM",
+      "ESNext",
       "DOM.Iterable",
-      "ESNext"
     ],
     "allowJs": false,
     "skipLibCheck": true,
@@ -21,9 +21,14 @@
     "noImplicitAny": false,
     "jsx": "react-jsx",
     "types": [
-      "vitest/globals"
+      "vitest/globals",
+      "cypress.d.ts"
     ]
   },
+  "include": [
+    "src",
+    "cypress.d.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
