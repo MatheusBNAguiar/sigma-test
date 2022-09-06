@@ -16,15 +16,20 @@ services:
       --watch,        db.js
     ]
     ports:
-      - "8080:80"
+      - "3000:80"
     environment:
       - FAILURE_RATE=0.1
       - MIN_DELAY_MS=0
       - MAX_DELAY_MS=3000
 
-  # app:
-  #   build:
-  #     context: app
-  #     dockerfile: Dockerfile
-  #   depends_on:
-  #     - api
+  app:
+    build:
+      context: app
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app
+    tty: true
+    depends_on:
+      - api
+    ports: 
+        - "8080:80"

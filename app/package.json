@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "build-storybook": "build-storybook",
-    "dev": "vite",
+    "dev": "vite --host",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "test": "vitest",

@@ -21,13 +21,11 @@
     "noImplicitAny": false,
     "jsx": "react-jsx",
     "types": [
-      "vitest/globals",
-      "cypress.d.ts"
+      "vitest/globals"
     ]
   },
   "include": [
-    "src",
-    "cypress.d.ts"
+    "src"
   ],
   "references": [
     {
