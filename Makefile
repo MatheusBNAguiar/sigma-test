@@ -8,4 +8,5 @@ setup:
 run: setup
 	docker-compose up
 
-test: ;
+test:
+	cd app/ && npm run test:e2e
