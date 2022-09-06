@@ -59,6 +59,21 @@ describe('Sanctions Page', () => {
 
   it('It should display loading and then results', () => {
     cy.visit('/');
+    cy.intercept('GET', `${API_ROUTE}aliases*`, {
+      statusCode: 201,
+      body: [
+        {
+          id: 10000,
+          sanctionId: 100,
+          alias: 'KCST',
+          sanction: {
+            id: 100,
+            primaryName: 'KCST',
+            issued: '2006-06-12T22:24:11.602Z',
+          },
+        },
+      ],
+    });
     cy.intercept('GET', `${API_ROUTE}aliases*`, req => {
       req.on('response', res => {
         res.setThrottle(1000);
