@@ -14,11 +14,19 @@ type AliasSanctionTableProps = {
 
 function SanctionsResults({ data, status, onRetry }: AliasSanctionTableProps) {
   if (status === 'error') {
-    return <TableBodyEmptyCell colSpan={100}><ErrorStatus message="Search request failed" onRetry={onRetry} /></TableBodyEmptyCell>;
+    return (
+      <TableBodyEmptyCell colSpan={100}>
+        <ErrorStatus message="Search request failed" onRetry={onRetry} />
+      </TableBodyEmptyCell>
+    );
   }
 
   if (status === 'loading') {
-    return <TableBodyEmptyCell colSpan={100}><LoadingStatus /></TableBodyEmptyCell>;
+    return (
+      <TableBodyEmptyCell colSpan={100}>
+        <LoadingStatus />
+      </TableBodyEmptyCell>
+    );
   }
 
   if (!data || data?.length === 0) {
@@ -27,18 +35,23 @@ function SanctionsResults({ data, status, onRetry }: AliasSanctionTableProps) {
 
   return (
     <React.Fragment>
-      {data.map(alias => (
-        <TableRow key={`${alias.id}-${alias?.sanctionId}`}>
-          <TableCell>{alias?.sanction?.primaryName}</TableCell>
-          <TableCell>{alias?.sanction?.ended ? 'Ended' : 'Issued'}</TableCell>
-          <TableCell>{alias?.alias}</TableCell>
-          <TableCell>
-            <Link to={`/sanctions/${alias?.sanctionId}`}>
-              <EnterIcon />
-            </Link>
-          </TableCell>
-        </TableRow>
-      ))}
+      {data.map(alias => {
+        const hasSanctionLinked = Boolean(alias?.sanction?.primaryName);
+        return (
+          <TableRow key={`${alias.id}-${alias?.sanctionId}`}>
+            <TableCell>{hasSanctionLinked ? alias?.sanction?.primaryName : 'Alias not linked'}</TableCell>
+            <TableCell>{hasSanctionLinked ? (alias?.sanction?.ended ? 'Ceased' : 'In Effect') : '-'}</TableCell>
+            <TableCell>{alias?.alias}</TableCell>
+            <TableCell>
+              {hasSanctionLinked && (
+                <Link to={`/sanctions/${alias?.sanctionId}`}>
+                  <EnterIcon />
+                </Link>
+              )}
+            </TableCell>
+          </TableRow>
+        );
+      })}
     </React.Fragment>
   );
 }
