@@ -14,3 +14,6 @@ run: setup
 
 test:
 	cd app/ && npm run test:e2e
+
+test-component:
+	cd app/ && npm run test
